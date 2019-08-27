@@ -1,0 +1,37 @@
+.div-globalHeader-wrapper{
+  .div-leftPartIcons{
+    
+  }
+  .Typography-gallery{
+    @media (max-width: 800px){
+      display: None;
+    }
+  }
+
+
+
+  .div-headerIcons{
+    @media (max-width: 800px){
+      display: None;
+    }
+  }
+  .div-visitor{
+
+  }
+  .div-member{
+
+  }
+  .div-hidden{
+    display: none;
+  }
+
+  .Button-Text{
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    margin: 0px 5px;
+    padding: 5px;
+  }
+
+
+}

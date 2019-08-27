@@ -1,0 +1,16 @@
+.span-metaError{
+  color: red;
+}
+.div-loginPage-wrapper{
+  .form-loginPage{
+    width: 35%;
+    margin: auto;
+  }
+
+  .div-recaptcha-container{
+    position: relative;
+    #g-recaptcha > div{
+      margin: auto;
+    }
+  }
+}

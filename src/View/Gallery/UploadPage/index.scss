@@ -1,0 +1,27 @@
+.div-uploadPage-wrapper{
+  .form-upload{
+    display: inline-flex;
+    width: 100%;
+    .div-placeholder{
+      width: 55%;
+      height: 400px;
+      margin-left: 10px;
+    }
+    .span-drapdropText{
+      text-align: center;
+      padding: 200px 100px;
+      display: block;
+    }
+    .div-uploadField{
+      display: inline-flex;
+      padding: 20px;
+      .img-preview{
+        max-width: 300px;
+      }
+      .Input-imgName, .Input-imgDesc, .Dropdown-tags{
+        width: 250px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

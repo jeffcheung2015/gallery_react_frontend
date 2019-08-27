@@ -1,0 +1,184 @@
+@import 'loaders.css/src/animations/line-scale-pulse-out-rapid.scss';
+@import '~react-calendar-heatmap/dist/styles.css';
+
+.div-profilePage-wrapper{
+  display: inline-flex;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+  margin-bottom: 60px;
+  .Loader-profile{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .div-leftCard-area{
+    padding: 20px;
+    .Label-profile{
+      margin-left: 5px !important;
+      margin-bottom: 5px;
+    }
+    .Image-profileAvatar{
+      height: 250px;
+      display: inline-flex;
+      width: 100%;
+      img{
+        margin: auto;
+        max-height: 250px;
+      }
+    }
+    .Button-updateProfile{
+      display: block;
+      margin: auto;
+      width: 100%;
+    }
+  }
+  .ButtonGroup-profile{
+    margin: 20px auto !important;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+  }
+}
+
+.form-updateUser{
+  .div-inlineGrid{
+    display: inline-grid;
+  }
+  .Button-updateSubmit{
+    margin: 30px 30px 0px;
+    float: right;
+  }
+}
+
+.span-drapdropText{
+  text-align: center;
+  padding: 150px;
+  display: block;
+  svg{
+    display: block;
+    margin: auto;
+  }
+  text-align: center;
+}
+
+.div-calendarHeatmap-wrapper{
+  width: 100%;
+  position: relative;
+  left: 50%;
+  top: 0%;
+  transform: translateX(-50%);
+  .react-calendar-heatmap-weekday-label, .react-calendar-heatmap-month-label{
+    font-size: 6px !important;
+  }
+  svg{
+    width: 75%;
+    margin: auto;
+    display: block;
+  }
+  .color-heatmap{
+    &-0{
+      fill: #ecf1f1
+    }
+    &-1{
+      fill: #c0e9e6
+    }
+    &-2{
+      fill: #85e6df
+    }
+    &-3{
+      fill: #5cefe4
+    }
+    &-4{
+      fill: #00b4ef
+    }
+    &-5{
+      fill: #0067ef
+    }
+  }
+}
+
+.div-uploadedImgs-wrapper{
+  .Pagination-uploadedImgs{
+    width: 100%;
+    justify-content: center;
+    border-radius: 0px;
+    border-left: 0px;
+    border-right: 0px;
+  }
+
+  .div-noImage-placeholder{
+    margin: 150px auto;
+    display: inline-flex;
+    width: 100%;
+    .span-noImages{
+      margin: auto;
+    }
+  }
+
+  .Card-imgs{
+    border: 0px !important;
+    box-shadow: none;
+    .Grid-img-wrapper{
+      margin: 5px;
+      .Card-img{
+        display: grid;
+        width: 100%;
+        height: 200px;
+        &:hover{
+          background: #3F3F3F;
+        }
+        .Image-uploadedImgs{
+          margin: auto;
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+.Modal-updateAvatar{
+  width: 60% !important;
+  .Button-updateAvatar{
+    // &:hover{
+    //   background: #cacbcd !important;
+    // }
+    float: right;
+    margin: 0px 30px 30px 0px;
+    background: #e0e1e2;
+    color: rgba(0,0,0,.87) !important;
+  }
+}
+.Modal-updateProfile{
+  width: 40% !important;
+}
+.Modal-updateImage{
+  .div-updateImage-wrapper{
+    .Input-imgDesc, .Input-imgName{
+      margin: 0px 50px;
+      width: 200px;
+    }
+    .Dropdown-tags{
+      width: 500px;
+      margin: 10px 50px;
+    }
+  }
+  .div-deleteUpdateImageButton-wrapper{
+    float: right;
+    margin: 0px 30px 30px 0px;
+    .Button-updateImage{
+      margin: auto 20px;
+      // background: #e0e1e2;
+      // color: rgba(0, 0, 0, 0.87) !important;
+    }
+    .Button-deleteImage{
+      margin: auto 20px;
+      background: #db2828;
+      color: rgba(255,255,255, 0.87);
+      &:hover{
+        opacity: 0.6;
+      }
+    }
+  }
+}

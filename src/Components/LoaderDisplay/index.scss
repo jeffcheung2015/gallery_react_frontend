@@ -1,0 +1,19 @@
+@import 'loaders.css/src/animations/line-scale-pulse-out-rapid.scss';
+.div-loaderDisplay-wrapper{
+  .div-loaderDisplay-cover{
+    background: linear-gradient(to left, #f9f9f9, #e9e9e9);
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+  }
+
+  .div-loader-wrapper{
+    z-index: 10000;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+}
