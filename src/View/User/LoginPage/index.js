@@ -11,7 +11,6 @@ import VpnKey from '@material-ui/icons/VpnKey';
 import { ReCaptcha } from 'react-recaptcha-google';
 import Grid from '@material-ui/core/Grid';
 import { Form, Field } from 'react-final-form'
-
 import { withStyles } from '@material-ui/styles';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -26,7 +25,8 @@ import { withSnackbar } from 'notistack';
 
 const overrideStyles = () => ({
   loginPaper:{
-    padding: '30px'
+    padding: '30px',
+    marginBottom: '30px'
   },
   loginLabel: {
     fontSize: '26px',

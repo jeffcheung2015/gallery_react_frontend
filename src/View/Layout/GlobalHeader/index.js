@@ -39,7 +39,7 @@ const drawerWidth = 240
 const overrideStyles = (theme) => ({
   appBar: {
     zIndex: "9999",
-    transition: "margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms"
+    transition: "margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
   },
   appBarShift: {
     zIndex: "9999",
@@ -48,6 +48,7 @@ const overrideStyles = (theme) => ({
     transition: "margin 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
   },
   toolbar:{
+    minHeight: "40px !important",
     background: 'linear-gradient(to right, #DFDFDF, #EFEFEF)'
   },
   iconButtonMenu:{

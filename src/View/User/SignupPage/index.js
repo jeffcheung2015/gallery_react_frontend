@@ -26,7 +26,8 @@ import { startLoading, stopLoading } from "Reducer/UI/UIActions";
 
 const overrideStyles = () => ({
   signupPaper:{
-    padding: '30px'
+    padding: '30px',
+    marginBottom: "30px"
   },
   signupLabel: {
     fontSize: '26px',

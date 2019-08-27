@@ -17,13 +17,12 @@ import _forEach from 'lodash/forEach';
 import _map from 'lodash/map';
 import _assign from 'lodash/assign';
 import { FieldArray } from 'react-final-form-arrays'
-import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux';
 import { respCodeToMsg, respCodes } from 'Utils/Config/constants';
 import { startLoading, stopLoading } from "Reducer/UI/UIActions";
 import { verifyJWTToken, userLogout } from "Reducer/User/UserActions";
 import { withSnackbar } from 'notistack';
-import { Dropdown, Input } from 'semantic-ui-react'
+import { Dropdown, Input, Button, Divider, Header, Icon } from 'semantic-ui-react'
 import axios from 'axios'
 
 const overrideStyles = theme => ({
@@ -39,10 +38,6 @@ const overrideStyles = theme => ({
   AddPhotoIcon:{
     margin: "auto",
     display: "block"
-  },
-  submitButton:{
-    display: 'block',
-    margin: "30px auto"
   }
 
 });
@@ -224,6 +219,12 @@ class UploadPage extends React.Component{
             </CardActionArea>
           </Card>
           <Card className={classes.pendingUpload}>
+            <Divider horizontal>
+              <Header as='h4'>
+                <Icon name='images outline' />
+                Upload Images
+              </Header>
+            </Divider>
             { files.length == 0 && <div className="div-placeholder"></div> }
             { files.length > 0 && _map(files, (image, idx)=>{
               return (
@@ -263,14 +264,7 @@ class UploadPage extends React.Component{
               )
             })}
             {
-              files.length > 0 &&
-              <Button variant="contained"
-               color="primary"
-               className={classes.submitButton}
-               type="submit"
-               >
-                Submit
-              </Button>
+              files.length > 0 && <Button type="submit" className="Button-submit"> Submit </Button>
             }
           </Card>
         </form>
