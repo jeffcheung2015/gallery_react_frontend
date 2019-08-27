@@ -149,6 +149,9 @@ class ProfilePage extends React.Component{
       this.handleSnackBar(`${type} the selected image successfully.`, 'success')
       await this.props.getImages(this.props.userId, currPage, imgPerPage)
       this.handleModalClose('uploadedImgs')
+      if(type === 'Delete'){
+        await this.props.getAuthUser(this.props.access)
+      }
     }else{
       this.handleSnackBar(respCodeToMsg[this.props.lastRespMsg], "error")
     }
@@ -340,7 +343,6 @@ class ProfilePage extends React.Component{
         }
       }
     })
-    console.log(">>> ProfilePage.dateCountList: ", dateCountList)
 
     let tagsOptions = _map(tags, (tag, idx) => {
       return{
