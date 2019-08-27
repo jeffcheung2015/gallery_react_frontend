@@ -244,7 +244,7 @@ class HomePage extends React.Component{
                       active
                     />
                   </div>
-                  : (data && data.length == 0) ? (
+                  : ((data && data.length == 0) || !data) ? (
                     <div className="div-noImage-placeholder">
                       <span className="span-noImages"><Icon name="images"/> No Images</span>
                     </div>) : _map(data, (elem, idx) => {
