@@ -1,3 +1,15 @@
+
+please refer to the backend's repository steps to build this app
+this repository contains only the frontend side's code and need to integrate with the backend to make the web app works completely.
+
+https://gitlab.com/jeffcheung2015/django-gallery-project
+
+
+
+
+
+=========================================================================================================================================================
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
