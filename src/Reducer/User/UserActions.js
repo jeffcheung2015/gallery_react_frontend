@@ -4,7 +4,7 @@ import { signup, login, refreshToken, verifyToken,
 import jwt from 'jsonwebtoken';
 import { respCodes } from 'Utils/Config/constants'
 
-export const userSignup = (username, password, email, callbackObj) =>{
+export const userSignup = (username, password, email, recaptchaToken, callbackObj) =>{
   return async(dispatch) => {
     var isSuccessSignup = false
     var respCode = "99999"
@@ -12,7 +12,8 @@ export const userSignup = (username, password, email, callbackObj) =>{
       const resp = await signup({
         username,
         password,
-        email
+        email,
+        recaptchaToken,
       });
       console.log(">>> userSignup resp:" , resp)
       respCode = resp.data.resp_code
@@ -36,7 +37,7 @@ export const userSignup = (username, password, email, callbackObj) =>{
     }
   }
 }
-export const userLogin = (username, password, callbackObj) => {
+export const userLogin = (username, password, recaptchaToken, callbackObj) => {
   return async (dispatch) => {
     var isSuccessLogin = false
     var respCode = "99999"
@@ -45,7 +46,8 @@ export const userLogin = (username, password, callbackObj) => {
     try{
       const resp = await login ({
         username,
-        password
+        password,
+        recaptchaToken
       });
       console.log(">>> userLogin resp:", resp)
       const { access, refresh } = resp.data;

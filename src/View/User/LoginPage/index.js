@@ -88,18 +88,29 @@ class LoginPage extends React.Component{
   }
 
   verifyCallback(recaptchaToken) {
-    // Here you will get the final recaptchaToken!!!
+    // the recaptcha token from google after sending the request
     console.log(recaptchaToken, "<= your recaptcha token")
+    this.state.recaptchaToken = recaptchaToken
+
   }
 
   async onFormSubmit(formVals){
     console.log(">>> onFormSubmit, formVals: ", formVals)
     var submitErrorObj = {}
-    // TBD: password len at least 6
     const { username, password } = formVals
+    if(!!!this.state.recaptchaToken){
+      submitErrorObj.recaptchaToken = "Recaptcha verification needs to be done."
+      this.handleSnackBar("Recaptcha verification needs to be done.", 'warning')
+    }
+    if(password.length < 8){
+      submitErrorObj.password = "Password length must be greater than 8.";
+    }
+    if (!_isEmpty(submitErrorObj)){
+      return submitErrorObj
+    }
     console.log(respCodeToMsg[this.props.lastRespMsg])
     this.props.startLoading()
-    await this.props.userLogin(username, password,
+    await this.props.userLogin(username, password, this.state.recaptchaToken,
       {
         onSuccess: () => this.handleSnackBar("Login successfully.", 'success'),
         onFail: (resp_code) => this.handleSnackBar(respCodeToMsg[resp_code], 'error')
@@ -208,7 +219,7 @@ class LoginPage extends React.Component{
                       size="normal"
                       data-theme="dark"
                       render="explicit"
-                      sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                      sitekey="6LcpqLUUAAAAAO9A0zXVAModmR0QqaUEw2NGEzsI"
                       onloadCallback={this.onLoadRecaptcha}
                       verifyCallback={this.verifyCallback}
                     />

@@ -17,6 +17,7 @@ export const urlPathToTitle = {
 export const respCodes = {
   SUCCESS_REQ: "00000",
   UNEXPECTED_SERVER_ERROR: "99999",
+  GOOGLE_RECAPTCHA_VERIFY_FAIL: "99998",
   INVALID_INPUTS: "00001",
   DUP_CRED: "00002",
   USER_NOT_EXIST: "00003",
@@ -32,6 +33,7 @@ export const respCodes = {
 export const respCodeToMsg = {
   "00000": "Successful Request",
   "99999": "Unexpected server error occurs",
+  "99998": "Google recaptcha verification failed",
   "00001": "Some user input fields are invalid",
   "00002": "Username or email are duplicated",
   "00003": "User doesn't exist",

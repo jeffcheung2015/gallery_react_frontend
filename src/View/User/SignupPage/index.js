@@ -87,8 +87,9 @@ class SignupPage extends React.Component{
   }
 
   verifyCallback(recaptchaToken) {
-    // Here you will get the final recaptchaToken!!!
+    // the recaptcha token from google after sending the request
     console.log(recaptchaToken, "<= your recaptcha token")
+    this.state.recaptchaToken = recaptchaToken
   }
 
 
@@ -97,22 +98,24 @@ class SignupPage extends React.Component{
     console.log(">>> onFormSubmit: ", formVals)
     var submitErrorObj = {}
     const {password, confirmPassword, email, username} = formVals
+    if(!!!this.state.recaptchaToken){
+      submitErrorObj.recaptchaToken = "Recaptcha verification needs to be done."
+      this.handleSnackBar("Recaptcha verification needs to be done.", 'warning')
+    }
     if (password != confirmPassword){
       submitErrorObj.password = "Password and Confirm Password field don't match.";
     }
     if(password.length < 8){
       submitErrorObj.password = "Password length must be greater than 8.";
     }
-
     if (!isValidEmail(email)){
       submitErrorObj.email = "Not a valid email."
     }
-
     if (!_isEmpty(submitErrorObj)){
       return submitErrorObj
     }
     this.props.startLoading()
-    await this.props.userSignup(username, password, email, {
+    await this.props.userSignup(username, password, email, this.state.recaptchaToken, {
       onSuccess: () => this.handleSnackBar("Sign up successfully.", 'success'),
       onFail: (resp_code) => this.handleSnackBar(respCodeToMsg[resp_code], 'error')
     })
@@ -241,7 +244,7 @@ class SignupPage extends React.Component{
                       size="normal"
                       data-theme="dark"
                       render="explicit"
-                      sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                      sitekey="6LcpqLUUAAAAAO9A0zXVAModmR0QqaUEw2NGEzsI"
                       onloadCallback={this.onLoadRecaptcha}
                       verifyCallback={this.verifyCallback}
                     />
