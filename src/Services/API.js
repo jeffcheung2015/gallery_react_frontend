@@ -15,7 +15,7 @@ export function upsertImageAxios(data, access) {
 
 
 export function getImageAxios(userId, page, imgPerPage, tags) {
-  var reqUrl = `/getimage/?`
+  var reqUrl = `/api/getimage/?`
   var and = ``
   if (userId){ reqUrl += and + `userId=${userId}`; and = `&`}
   if (page){ reqUrl += and + `page=${page}`; and = `&`}
@@ -34,7 +34,7 @@ export function getImageAxios(userId, page, imgPerPage, tags) {
 };
 
 export function getTagsAxios() {
-  var reqUrl = `/gettags/`
+  var reqUrl = `/api/gettags`
 
   return axiosCreate({
     url: reqUrl,
@@ -43,7 +43,7 @@ export function getTagsAxios() {
 };
 
 export function getImageByUserIdAxios(access) {
-  var reqUrl = `/getuserimage/`
+  var reqUrl = `/api/getuserimage`
 
   return axiosCreate({
     url: reqUrl,

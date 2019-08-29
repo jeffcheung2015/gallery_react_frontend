@@ -2,7 +2,7 @@ import axiosCreate from 'Services/Interceptor';
 
 export function signup(data) {
   return axiosCreate({
-    url: '/signup',
+    url: '/api/signup',
     method: 'POST',
     data,
   });
@@ -10,7 +10,7 @@ export function signup(data) {
 
 export function login(data) {
   return axiosCreate({
-    url: '/login',
+    url: '/api/login',
     method: 'POST',
     data,
   });
@@ -36,14 +36,14 @@ export function verifyToken(access) {
 
 export function logout() {
   return axiosCreate({
-    url: '/logout',
+    url: '/api/logout',
     method: 'GET',
   });
 };
 
 export function getUser(access) {
   return axiosCreate({
-    url: '/getuser',
+    url: '/api/getuser',
     method: 'POST',
     headers: {'Authorization': "Bearer " + access},
   });
