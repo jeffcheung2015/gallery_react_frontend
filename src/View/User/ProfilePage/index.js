@@ -23,7 +23,8 @@ import { Form, Field } from 'react-final-form'
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { Button, Header, Pagination, Icon, Image, Modal, Label, Grid, Dropdown, Input, Divider } from 'semantic-ui-react'
+import { Button, Header, Pagination, Icon, Image, Modal,
+   Label, Grid, Dropdown, Input, Divider } from 'semantic-ui-react'
 import VpnKey from '@material-ui/icons/VpnKey';
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternate';
 import Dropzone from 'react-dropzone';
@@ -367,6 +368,7 @@ class ProfilePage extends React.Component{
                 <Modal
                   className="Modal-updateAvatar"
                   open={avatarUpdateOpen}
+                  dimmer="blurring"
                   onClose={() => this.handleModalClose('avatar')}
                   trigger={
                     <Image
@@ -448,6 +450,7 @@ class ProfilePage extends React.Component{
                 <Modal
                   className="Modal-updateProfile"
                   open={profileUpdateOpen}
+                  dimmer="blurring"
                   onClose={() => this.handleModalClose('profile')}
                   trigger={<Button onClick={() => this.handleModalOpen('profile')} className="Button-updateProfile">Update Profile</Button>}>
                   <Modal.Header>Update Profile</Modal.Header>
@@ -618,6 +621,7 @@ class ProfilePage extends React.Component{
         <Modal
           className="Modal-updateImage"
           open={imgUpdateOpen}
+          dimmer="blurring"
           onClose={() => this.handleModalClose('uploadedImgs')}>
           <Modal.Header>Update Image</Modal.Header>
           <Modal.Content image>

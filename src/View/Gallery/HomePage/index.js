@@ -11,13 +11,16 @@ import _range from 'lodash/range';
 import _forEach from 'lodash/forEach';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
-import { Icon, Pagination, Label, Button, Select, Grid, Image, Card, Divider, Header, Dropdown, Placeholder } from 'semantic-ui-react'
+import { Icon, Pagination, Label, Button, Select,
+   Grid, Image, Modal, Card, Divider, Header, Table,
+    Dropdown, Placeholder } from 'semantic-ui-react'
 import { bindActionCreators } from 'redux';
 import { respCodes } from "Utils/Config/constants";
 import { getImages, getTags } from 'Reducer/API/APIActions';
 import { startLoading, stopLoading } from 'Reducer/UI/UIActions';
 import { BASE_URL } from 'Utils/Config/constants'
 import Loader from 'react-loaders'
+import moment from 'moment';
 
 const overrideStyles = theme => ({
   gridList: {
@@ -37,7 +40,14 @@ class HomePage extends React.Component{
       currPage: 1,
       imgPerPage: '12',
       selectedTags: [],
-      isContentLoading: false
+      isContentLoading: false,
+      imgPreviewOpen: false,
+      currImgDesc: "",
+      currImgName: "",
+      currImgSrc: "",
+      currImgCreatedAt: "",
+      currTags: [],
+
     }
     this.onPageChange = this.onPageChange.bind(this)
     this.onPerPageChange = this.onPerPageChange.bind(this)
@@ -45,6 +55,35 @@ class HomePage extends React.Component{
     this.onClickLabel = this.onClickLabel.bind(this)
     this.handleContentLoading = this.handleContentLoading.bind(this)
     this.onClickClearTags = this.onClickClearTags.bind(this)
+    this.handleModalClose = this.handleModalClose.bind(this)
+    this.handleModalOpen = this.handleModalOpen.bind(this)
+    this.onImageClick = this.onImageClick.bind(this)
+  }
+  handleModalClose(){
+    console.log(">>> handleModalClose")
+    this.setState({
+      currImgName: "",
+      currImgName: "",
+      currImgSrc: "",
+      currTags: [],
+      currImgCreatedAt: "",
+      imgPreviewOpen: false
+    })
+  }
+  handleModalOpen(){
+    console.log(">>> handleModalOpen")
+
+  }
+  onImageClick(currImgName, currImgDesc, currImgSrc, currTags, currImgCreatedAt){
+    console.log(">>> onImageClick")
+    this.setState({
+      currImgName,
+      currImgDesc,
+      currImgSrc,
+      currTags,
+      currImgCreatedAt,
+      imgPreviewOpen: true
+    })
   }
 
   async componentDidMount(){
@@ -149,7 +188,8 @@ class HomePage extends React.Component{
     } = this.props
 
     const {
-      imgPerPage, currPage, selectedTags, isContentLoading
+      imgPerPage, currPage, selectedTags, isContentLoading,
+      imgPreviewOpen, currImgSrc, currImgName, currImgDesc, currTags, currImgCreatedAt
     } = this.state
 
     let cardIdxToColor = ['red','orange','yellow','olive','green','teal','blue','violet',
@@ -166,6 +206,45 @@ class HomePage extends React.Component{
     return (
       <div className="div-homePage-wrapper">
         <div className="div-pageWidgets-wrapper">
+          <Modal
+            className="Modal-updateAvatar"
+            open={imgPreviewOpen}
+            dimmer="blurring"
+            onClose={() => this.handleModalClose()}
+            >
+            <Table basic='very' celled collapsing className="Table-imgDescContent">
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell className="TableCell-imgDescContent-key"><Icon name="list"/>Name:</Table.Cell>
+                <Table.Cell className="TableCell-imgDescContent-val">{currImgName}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell className="TableCell-imgDescContent-key"><Icon name="newspaper outline"/>Description:</Table.Cell>
+                <Table.Cell className="TableCell-imgDescContent-val">{currImgDesc}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell className="TableCell-imgDescContent-key"><Icon name="calendar alternate outline"/>Uploaded Date:</Table.Cell>
+                <Table.Cell className="TableCell-imgDescContent-val">{currImgCreatedAt}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell className="TableCell-imgDescContent-key"><Icon name="tags"/>Tags:</Table.Cell>
+                <Table.Cell className="TableCell-imgDescContent-val">
+                {
+                  _map(currTags, (elem, idx) => {
+                    return (
+                      <Label className="Label-tags" key={"currLabel-" + idx}>
+                      {tags[currTags[idx]-1]}
+                      </Label>
+                    )
+                  })
+                }
+                </Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            </Table>
+            <Image src={currImgSrc} wrapped />
+          </Modal>
+
           <Pagination
             defaultActivePage={1}
             ellipsisItem={{ content: <Icon name='ellipsis horizontal' />, icon: true }}
@@ -248,14 +327,20 @@ class HomePage extends React.Component{
                     <div className="div-noImage-placeholder">
                       <span className="span-noImages"><Icon name="images"/> No Images</span>
                     </div>) : _map(data, (elem, idx) => {
-                    return (
-                      <Grid.Column key={"GridCol-" + idx}>
-                        <Card className="Card-img" color={cardIdxToColor[idx%12]}>
-                          <Image src={BASE_URL + elem.image_file}/>
-                        </Card>
-                      </Grid.Column>
-                    )
-                  })
+                      let currImgSrc = BASE_URL + elem.image_file
+                      let currImgName = elem.image_name
+                      let currImgDesc = elem.image_desc
+                      let currTags = elem.tags
+                      let currImgCreatedAt = moment(new Date(elem.created_at)).format("MM-DD-YYYY")
+                      return (
+                        <Grid.Column key={"GridCol-" + idx}>
+                          <Card onClick={() => this.onImageClick(currImgName, currImgDesc, currImgSrc, currTags, currImgCreatedAt)} className="Card-img" color={cardIdxToColor[idx%12]}>
+                            <Image src={currImgSrc}/>
+                          </Card>
+                        </Grid.Column>
+                      )
+                    }
+                  )
                 }
               </Grid>
             }
