@@ -113,7 +113,10 @@ class LoginPage extends React.Component{
     await this.props.userLogin(username, password, this.state.recaptchaToken,
       {
         onSuccess: () => this.handleSnackBar("Login successfully.", 'success'),
-        onFail: (resp_code) => this.handleSnackBar(respCodeToMsg[resp_code], 'error')
+        onFail: (resp_code) => {
+          this.handleSnackBar(respCodeToMsg[resp_code], 'error');
+          this.capchaRef.reset();
+        }
       });
     this.props.stopLoading()
   }

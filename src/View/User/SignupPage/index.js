@@ -117,7 +117,10 @@ class SignupPage extends React.Component{
     this.props.startLoading()
     await this.props.userSignup(username, password, email, this.state.recaptchaToken, {
       onSuccess: () => this.handleSnackBar("Sign up successfully.", 'success'),
-      onFail: (resp_code) => this.handleSnackBar(respCodeToMsg[resp_code], 'error')
+      onFail: (resp_code) => {
+        this.handleSnackBar(respCodeToMsg[resp_code], 'error');
+        this.capchaRef.reset();
+      }
     })
     this.props.stopLoading()
     if (this.props.lastRespMsg === respCodes.SUCCESS_REQ){
@@ -200,7 +203,7 @@ class SignupPage extends React.Component{
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={5}>
                   <Field fullWidth required name="password"
                     render={({input, meta})=>(
                       <div>
@@ -218,7 +221,8 @@ class SignupPage extends React.Component{
                     )}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={2}></Grid>
+                <Grid item xs={5}>
                   <Field fullWidth required name="confirmPassword"
                     render={({input, meta})=>(
                       <div>
