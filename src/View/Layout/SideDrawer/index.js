@@ -34,7 +34,7 @@ const overrideStyles = theme => ({
     display: 'inline-flex',
     alignItems: 'center',
     padding: '0 16px',
-    minHeight: '64px',
+    minHeight: '45px',
     justifyContent: 'flex-start',
     background: '#FFFFFF'
   },
@@ -69,7 +69,7 @@ class SideDrawer extends React.Component{
             </div>
             <Divider />
             <List>
-              
+
             </List>
 
           </Drawer>

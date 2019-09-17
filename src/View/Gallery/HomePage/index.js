@@ -13,14 +13,15 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
 import { Icon, Pagination, Label, Button, Select,
    Grid, Image, Modal, Card, Divider, Header, Table,
-    Dropdown, Placeholder } from 'semantic-ui-react'
+    Dropdown, Placeholder, Search, Segment } from 'semantic-ui-react'
 import { bindActionCreators } from 'redux';
 import { respCodes } from "Utils/Config/constants";
 import { getImages, getTags } from 'Reducer/API/APIActions';
 import { startLoading, stopLoading } from 'Reducer/UI/UIActions';
-import { BASE_URL } from 'Utils/Config/constants'
+// import { BASE_URL } from 'Utils/Config/constants'
 import Loader from 'react-loaders'
 import moment from 'moment';
+import _debounce from 'lodash/debounce';
 
 const overrideStyles = theme => ({
   gridList: {
@@ -47,7 +48,7 @@ class HomePage extends React.Component{
       currImgSrc: "",
       currImgCreatedAt: "",
       currTags: [],
-
+      searchVal: ""
     }
     this.onPageChange = this.onPageChange.bind(this)
     this.onPerPageChange = this.onPerPageChange.bind(this)
@@ -58,6 +59,7 @@ class HomePage extends React.Component{
     this.handleModalClose = this.handleModalClose.bind(this)
     this.handleModalOpen = this.handleModalOpen.bind(this)
     this.onImageClick = this.onImageClick.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
   }
   handleModalClose(){
     console.log(">>> handleModalClose")
@@ -67,7 +69,7 @@ class HomePage extends React.Component{
       currImgSrc: "",
       currTags: [],
       currImgCreatedAt: "",
-      imgPreviewOpen: false
+      imgPreviewOpen: false,
     })
   }
   handleModalOpen(){
@@ -91,7 +93,7 @@ class HomePage extends React.Component{
     const {
       userId
     } = this.props
-    await this.props.getImages(-1, 1, 12, [])
+    await this.props.getImages(-1, 1, 12, [], '')
     if(!this.props.tags){ await this.props.getTags()}
     stopLoading()
   }
@@ -102,10 +104,10 @@ class HomePage extends React.Component{
       userId, lastRespMsg
     } = this.props
     const {
-      imgPerPage, selectedTags
+      imgPerPage, selectedTags, searchVal
     } = this.state
     this.handleContentLoading('start')
-    await this.props.getImages(-1, props.activePage, imgPerPage, selectedTags)
+    await this.props.getImages(-1, props.activePage, imgPerPage, selectedTags, searchVal)
     this.handleContentLoading('stop')
   }
 
@@ -115,10 +117,13 @@ class HomePage extends React.Component{
       selectedTags: dropdownObj.value
     })
     const {
+      imgPerPage, searchVal
+    } = this.state
+    const {
       currPage
     } = this.props
     this.handleContentLoading('start')
-    await this.props.getImages(-1, currPage, this.state.imgPerPage, dropdownObj.value)
+    await this.props.getImages(-1, currPage, imgPerPage, dropdownObj.value, searchVal)
     this.handleContentLoading('stop')
   }
 
@@ -129,10 +134,10 @@ class HomePage extends React.Component{
       imgPerPage: selectTarget.value
     })
     const {
-      currPage
+      currPage, searchVal, selectedTags
     } = this.state
     this.handleContentLoading('start')
-    await this.props.getImages(-1, currPage, selectTarget.value, this.state.selectedTags)
+    await this.props.getImages(-1, currPage, selectTarget.value, selectedTags, searchVal)
     this.handleContentLoading('stop')
   }
 
@@ -145,24 +150,37 @@ class HomePage extends React.Component{
       selectedTags: tmpSelectedTags
     })
     const {
-      currPage, imgPerPage
+      currPage, imgPerPage, searchVal
     } = this.state
-
     this.handleContentLoading('start')
-    await this.props.getImages(-1, 1, imgPerPage, tmpSelectedTags)
+    await this.props.getImages(-1, 1, imgPerPage, tmpSelectedTags, searchVal)
     this.handleContentLoading('stop')
   }
 
   async onClickClearTags(){
     const {
-      imgPerPage
+      imgPerPage, searchVal
     } = this.state
     this.setState({
       currPage: 1,
       selectedTags: []
     })
     this.handleContentLoading('start')
-    await this.props.getImages(-1, 1, imgPerPage, [])
+    await this.props.getImages(-1, 1, imgPerPage, [], searchVal)
+    this.handleContentLoading('stop')
+  }
+
+  async handleSearchChange(e, searchObj){
+    const {
+      imgPerPage, selectedTags
+    } = this.state
+    this.setState({
+      currPage: 1,
+      selectedTags: [],
+      searchVal: searchObj.value
+    })
+    this.handleContentLoading('start')
+    await this.props.getImages(-1, 1, imgPerPage, [], searchObj.value)
     this.handleContentLoading('stop')
   }
 
@@ -184,12 +202,13 @@ class HomePage extends React.Component{
   render(){
     const {
       classes, isLoading, userId, lastRespMsg,
-      data, imgCount, numPages, tags
+      data, imgCount, numPages, tags,
     } = this.props
 
     const {
       imgPerPage, currPage, selectedTags, isContentLoading,
-      imgPreviewOpen, currImgSrc, currImgName, currImgDesc, currTags, currImgCreatedAt
+      imgPreviewOpen, currImgSrc, currImgName, currImgDesc, currTags,
+      currImgCreatedAt, searchVal
     } = this.state
 
     let cardIdxToColor = ['red','orange','yellow','olive','green','teal','blue','violet',
@@ -207,7 +226,7 @@ class HomePage extends React.Component{
       <div className="div-homePage-wrapper">
         <div className="div-pageWidgets-wrapper">
           <Modal
-            className="Modal-updateAvatar"
+            className="Modal-imageViewer"
             open={imgPreviewOpen}
             dimmer="blurring"
             onClose={() => this.handleModalClose()}
@@ -255,6 +274,25 @@ class HomePage extends React.Component{
             onPageChange={this.onPageChange}
             totalPages={numPages}
           />
+
+          <Search
+            className="Search-image"
+            input={{ icon: 'search', iconPosition: 'right' }}
+            onSearchChange={_debounce(this.handleSearchChange, 500, {
+              leading: true,
+            })}
+            showNoResults={false}
+            loading={isContentLoading}
+            value={searchVal}
+          />
+          {
+            /*
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+              leading: true,
+            })}
+            */
+          }
 
           <div className="div-choosePageSelect">
             <span className="span-imgPerPage" >Images per page:</span>
@@ -313,7 +351,7 @@ class HomePage extends React.Component{
 
           <Card className="Card-imgs" color="blue">
             {
-              <Grid padded columns={4}  className="Grid-img-wrapper">
+              <Grid padded columns={4} className="Grid-img-wrapper">
                 {
                   (isContentLoading) ?
                   <div className="div-contentLoader">
@@ -327,7 +365,7 @@ class HomePage extends React.Component{
                     <div className="div-noImage-placeholder">
                       <span className="span-noImages"><Icon name="images"/> No Images</span>
                     </div>) : _map(data, (elem, idx) => {
-                      let currImgSrc = BASE_URL + elem.image_file
+                      let currImgSrc = elem.image_file
                       let currImgName = elem.image_name
                       let currImgDesc = elem.image_desc
                       let currTags = elem.tags

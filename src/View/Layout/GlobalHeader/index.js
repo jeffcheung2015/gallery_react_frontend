@@ -59,26 +59,7 @@ const overrideStyles = (theme) => ({
     color: '#000000',
     marginRight: '20px'
   },
-  searchBar:{
-    '&:hover': {
-      backgroundColor: fade('#8F8F8F', 0.25),
-    },
-    position: 'relative',
-    borderRadius: "50px",
-    backgroundColor: fade('#8F8F8F', 0.15),
-    marginLeft: 20,
-    width: '300px',
-  },
-  searchIcon: {
-    width: '50px',
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color:'#000000'
-  },
+  
   inputInput: {
     width: '100%',
     margin: '1px 1px 1px 40px',
@@ -177,19 +158,6 @@ class GlobalHeader extends React.Component{
               </Typography>
 
               <div className={classes.grow} />
-
-              <div className={classes.searchBar}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search..."
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                />
-              </div>
 
 
               <div className="div-headerIcons">

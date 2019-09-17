@@ -5,7 +5,10 @@
     width: 100%;
     position: relative;
 
-
+    .Search-image{
+      right: 350px;
+      position: absolute;
+    }
 
     .div-choosePageSelect{
       right: 0px;
@@ -91,11 +94,10 @@
   }
 
 }
-.Modal-updateAvatar{
+.Modal-imageViewer{
   width: auto !important;
   display: inline-flex;
-  left: 60%;
-  transform: translateX(-50%);
+  max-width: 40%;
   .Table-imgDescContent{
     position: relative;
     display: grid;

@@ -18,7 +18,7 @@ import _isEmpty from 'lodash/isEmpty'
 import { respCodes, respCodeToMsg } from "Utils/Config/constants";
 import CardActionArea from '@material-ui/core/CardActionArea';
 import moment from 'moment';
-import { BASE_URL } from 'Utils/Config/constants';
+// import { BASE_URL } from 'Utils/Config/constants';
 import { Form, Field } from 'react-final-form'
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -330,17 +330,19 @@ class ProfilePage extends React.Component{
 
     let dateCountList = new Array(noOfDay)
     _forEach(userProfile.activity, (activity, idx) => {
-      let dateIdx = endDate.getDate()-new Date(activity[0]).getDate()
+      let dateIdx = endDate.getDate() - new Date(activity[0]).getDate()
       dateCountList[dateIdx] = {
-        date: new Date(activity[0]),
-        count: activity[1]
+        date: new Date().setDate(new Date(activity[0]).getDate()),
+        count: activity[1],
+        day: endDate.getDate() - new Date(activity[0]).getDate()
       }
     })
     _forEach(_range(noOfDay), (val, idx) => {
       if(!dateCountList[idx]){
         dateCountList[idx] = {
           date: new Date().setDate(endDate.getDate() - val),
-          count: 0
+          count: 0,
+          day: endDate.getDate() - val
         }
       }
     })
@@ -373,12 +375,12 @@ class ProfilePage extends React.Component{
                   trigger={
                     <Image
                     onClick={() => this.handleModalOpen('avatar')}
-                    src={BASE_URL + userProfile.avatar} wrapped
+                    src={userProfile.avatar} wrapped
                     className="Image-profileAvatar"/>
                   }>
                   <Modal.Header>Profile Picture</Modal.Header>
                   <Modal.Content image>
-                    <Image size='medium' src={updatedAvatar || (BASE_URL + userProfile.avatar)} wrapped />
+                    <Image size='medium' src={updatedAvatar || (userProfile.avatar)} wrapped />
                     <Modal.Description>
                       <Card className={classes.updateAvatarArea}>
                         <CardActionArea className={classes.updateAvatarArea}>
@@ -560,7 +562,7 @@ class ProfilePage extends React.Component{
                     <Grid columns={3} className="Grid-img-wrapper">
                       {
                         _map(data, (elem, idx) => {
-                          const imgSrc = BASE_URL + elem.image_file
+                          const imgSrc = elem.image_file
                           return (
                             <Grid.Column key={"GridCol-" + idx} onClick={() => this.handleModalOpen('uploadedImgs', imgSrc, elem)}>
                               <Card className="Card-img">

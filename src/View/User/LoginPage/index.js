@@ -222,7 +222,9 @@ class LoginPage extends React.Component{
                       size="normal"
                       data-theme="dark"
                       render="explicit"
-                      sitekey="6LcpqLUUAAAAAO9A0zXVAModmR0QqaUEw2NGEzsI"
+                      sitekey={window.origin == 'http://django-dev.ap-southeast-1.elasticbeanstalk.com' ?
+                      "6LddeLgUAAAAAOR5taorQHIse2nUuP_nVf0D3CfE" :
+                      "6LcpqLUUAAAAAO9A0zXVAModmR0QqaUEw2NGEzsI"}
                       onloadCallback={this.onLoadRecaptcha}
                       verifyCallback={this.verifyCallback}
                     />

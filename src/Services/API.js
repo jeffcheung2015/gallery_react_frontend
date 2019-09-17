@@ -14,12 +14,13 @@ export function upsertImageAxios(data, access) {
 };
 
 
-export function getImageAxios(userId, page, imgPerPage, tags) {
-  var reqUrl = `/api/getimage/?`
+export function getImageAxios(userId, page, imgPerPage, tags, queryStr="") {
+  var reqUrl = (!!queryStr) ? `/api/searchimage/?` : `/api/getimage/?`
   var and = ``
   if (userId){ reqUrl += and + `userId=${userId}`; and = `&`}
   if (page){ reqUrl += and + `page=${page}`; and = `&`}
   if (imgPerPage){ reqUrl += and + `imgPerPage=${imgPerPage}`; and = `&`}
+  if (!!queryStr){ reqUrl += and + `searchTxt=${queryStr}`; and = `&`}
   if (tags) {
     var tagsStr = ""
     _forEach(tags, (tag, idx) => {

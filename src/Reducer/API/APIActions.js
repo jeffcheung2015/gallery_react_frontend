@@ -30,42 +30,14 @@ export const upsertImage = (formData, access) =>{
   }
 }
 
-// export const updateImage = (formData, access, callbackObj) =>{
-//   return async(dispatch) => {
-//     var respCode = "99999"
-//     var isSuccessUpdateImage = false
-//     try{
-//       const resp = await uploadImageAxios(formData, access)
-//       respCode = resp.data.resp_code
-//       isSuccessUpdateImage = respCode === respCodes.SUCCESS_REQ
-//     }catch(error){
-//       console.log(">>> APIActions.updateImage.error:", error)
-//       callbackObj.onFail()
-//     }
-//
-//     if(isSuccessUpdateImage){
-//       dispatch({
-//         lastRespMsg: respCode,
-//         type: type.API_UPLOAD_SUCCESS,
-//       })
-//     }else{
-//       dispatch({
-//         lastRespMsg: respCode,
-//         type: type.API_UPLOAD_FAIL,
-//       })
-//     }
-//
-//   }
-// }
-
-export const getImages = (userId, currPage, imgPerPage, tags) =>{
+export const getImages = (userId, currPage, imgPerPage, tags, queryStr) =>{
   return async(dispatch) => {
     var respCode = '99999'
     var isSuccessGettingImage = false
     var respData = {}
     try{
-      console.log(`>>> APIActions.getImages: userId:${userId}, currPage:${currPage}`)
-      const resp = await getImageAxios(userId, currPage, imgPerPage, tags)
+      console.log(`>>> APIActions.getImages: userId:${userId}, currPage:${currPage}, queryStr:${queryStr}`)
+      const resp = await getImageAxios(userId, currPage, imgPerPage, tags, queryStr)
       respCode = resp.data.resp_code
       respData = resp.data
       isSuccessGettingImage = respCode === respCodes.SUCCESS_REQ
