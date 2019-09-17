@@ -1,8 +1,8 @@
 
 please refer to the backend's repository steps to build this app
-this repository contains only the frontend side's code and need to integrate with the backend to make the web app works completely.
+this repository contains only the frontend side's code and need to integrate with the backend part to make the web app works.
 
-https://gitlab.com/jeffcheung2015/django-gallery-project
+https://github.com/jeffcheung2015/gallery_django_backend
 
 
 
