@@ -14,7 +14,7 @@ import Fab from '@material-ui/core/Fab';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import "./index.scss";
 
 const overrideStyles = theme => ({
@@ -96,3 +96,10 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(overrideStyles)(SideDrawer))
+
+SideDrawer.protoTypes = {
+  isLogin: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  userDtlFetched: PropTypes.bool.isRequired,
+  userDetail: PropTypes.object,
+}

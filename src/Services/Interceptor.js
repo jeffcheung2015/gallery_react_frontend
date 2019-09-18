@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const axiosCreate = axios.create({
-  // baseURL: "http://localhost:8000",
-  baseURL: "http://django-dev.ap-southeast-1.elasticbeanstalk.com/",
+  baseURL: process.env.REACT_APP_SERVER_HOST_URL,
   timeout: 30000,
 });
 

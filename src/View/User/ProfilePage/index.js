@@ -38,6 +38,8 @@ import { withSnackbar } from 'notistack';
 import { isValidEmail } from 'Utils/UtilFunctions';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
+import PropTypes from 'prop-types';
+
 
 const overrideStyles = (theme) => ({
   leftCard:{
@@ -689,3 +691,39 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(overrideStyles)(withSnackbar(ProfilePage))));
+
+ProfilePage.protoTypes = {
+  classes: PropTypes.object,
+
+  lastRespMsg: PropTypes.string.isRequired,
+  access: PropTypes.string.isRequired,
+  isLogin:PropTypes.bool.isRequired,
+  userId: PropTypes.number,
+  userDetail: PropTypes.object,
+  userProfile: PropTypes.object,
+  userDtlFetched: PropTypes.bool.isRequired,
+  data: PropTypes.arrayOf({
+    created_at: PropTypes.string,
+    id:PropTypes.number,
+    image_desc:PropTypes.string,
+    image_file:PropTypes.string,
+    image_name:PropTypes.string,
+    last_edit:PropTypes.string,
+    tags:PropTypes.arrayOf(PropTypes.number),
+    user:PropTypes.number,
+  }),
+  imgCount: PropTypes.number.isRequired,
+  numPages: PropTypes.number.isRequired,
+  isLogin: PropTypes.bool.isRequired,
+
+  getAuthUser: PropTypes.func.isRequired,
+  userLogout: PropTypes.func.isRequired,
+  upsertImage: PropTypes.func.isRequired,
+  getImages: PropTypes.func.isRequired,
+  updateAvatar: PropTypes.func.isRequired,
+  getTags: PropTypes.func.isRequired,
+  verifyJWTToken: PropTypes.func.isRequired,
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
+}

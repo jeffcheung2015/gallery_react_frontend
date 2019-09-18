@@ -9,6 +9,7 @@ import LoaderDisplay from 'Components/LoaderDisplay';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { startLoading, stopLoading } from 'Reducer/UI/UIActions';
+import PropTypes from 'prop-types';
 
 class Layout extends React.Component{
 
@@ -70,3 +71,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+
+Layout.protoTypes = {
+  isLogin: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
+  getTags: PropTypes.func.isRequired,
+
+}

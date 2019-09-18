@@ -21,7 +21,7 @@ import { startLoading, stopLoading } from "Reducer/UI/UIActions";
 import _forEach from 'lodash/forEach';
 import _isEmpty from 'lodash/isEmpty';
 import { withSnackbar } from 'notistack';
-
+import PropTypes from 'prop-types';
 
 const overrideStyles = () => ({
   loginPaper:{
@@ -76,7 +76,6 @@ class LoginPage extends React.Component{
   componentDidMount() {
     if (this.capchaRef) {
         this.capchaRef.reset();
-        // this.capchaRef.execute();
     }
 
   }
@@ -88,10 +87,7 @@ class LoginPage extends React.Component{
   }
 
   verifyCallback(recaptchaToken) {
-    // the recaptcha token from google after sending the request
-    console.log(recaptchaToken, "<= your recaptcha token")
     this.state.recaptchaToken = recaptchaToken
-
   }
 
   async onFormSubmit(formVals){
@@ -108,7 +104,6 @@ class LoginPage extends React.Component{
     if (!_isEmpty(submitErrorObj)){
       return submitErrorObj
     }
-    console.log(respCodeToMsg[this.props.lastRespMsg])
     this.props.startLoading()
     await this.props.userLogin(username, password, this.state.recaptchaToken,
       {
@@ -136,7 +131,6 @@ class LoginPage extends React.Component{
         errorObj[e] = 'Required field'
       }
     })
-    // TBD: reCaptcha
     return errorObj;
   }
 
@@ -144,7 +138,6 @@ class LoginPage extends React.Component{
     const {
       classes
     } = this.props
-
     return(
       <div className="div-loginPage-wrapper">
         <Form
@@ -222,9 +215,7 @@ class LoginPage extends React.Component{
                       size="normal"
                       data-theme="dark"
                       render="explicit"
-                      sitekey={window.origin == 'http://django-dev.ap-southeast-1.elasticbeanstalk.com' ?
-                      "6LddeLgUAAAAAOR5taorQHIse2nUuP_nVf0D3CfE" :
-                      "6LcpqLUUAAAAAO9A0zXVAModmR0QqaUEw2NGEzsI"}
+                      sitekey={process.env.REACT_APP_GOOGLE_RECAPCHA_KEY_SITE_KEY}
                       onloadCallback={this.onLoadRecaptcha}
                       verifyCallback={this.verifyCallback}
                     />
@@ -259,3 +250,14 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(overrideStyles)(withSnackbar(LoginPage))));
+
+LoginPage.protoTypes = {
+  classes: PropTypes.bool.isRequired,
+  access: PropTypes.string.isRequired,
+  userDtlFetched: PropTypes.bool.isRequired,
+  lastRespMsg: PropTypes.bool.isRequired,
+  isLogin: PropTypes.bool.isRequired,
+  userLogin:PropTypes.func.isRequired,
+  startLoading:PropTypes.func.isRequired,
+  startLoadstopLoadinging:PropTypes.func.isRequired,
+}

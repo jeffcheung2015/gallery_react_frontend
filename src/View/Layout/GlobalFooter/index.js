@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./index.scss"
+import PropTypes from 'prop-types';
 
 
 class GlobalFooter extends React.Component{
@@ -12,3 +13,6 @@ class GlobalFooter extends React.Component{
   }
 }
 export default GlobalFooter;
+
+GlobalFooter.protoTypes = {
+}

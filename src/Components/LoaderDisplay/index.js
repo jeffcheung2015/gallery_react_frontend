@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./index.scss"
 import { pure } from 'recompose';
 import Loader from 'react-loaders'
+import PropTypes from 'prop-types';
 
 const LoaderDisplay = (props) => {
 
@@ -23,3 +24,7 @@ const LoaderDisplay = (props) => {
   );
 }
 export default pure(LoaderDisplay);
+
+LoaderDisplay.propTypes = {
+
+}

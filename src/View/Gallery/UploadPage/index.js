@@ -23,7 +23,7 @@ import { startLoading, stopLoading } from "Reducer/UI/UIActions";
 import { verifyJWTToken, userLogout } from "Reducer/User/UserActions";
 import { withSnackbar } from 'notistack';
 import { Dropdown, Input, Button, Divider, Header, Icon } from 'semantic-ui-react'
-import axios from 'axios'
+import PropTypes from 'prop-types';
 
 const overrideStyles = theme => ({
   uploadCard:{
@@ -287,3 +287,14 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(overrideStyles)(withSnackbar(UploadPage)))
+
+UploadPage.protoTypes = {
+  classes: PropTypes.object,
+  isLogin: PropTypes.bool.isRequired,
+  tags:PropTypes.arrayOf(PropTypes.number).isRequired,
+  upsertImage: PropTypes.func.isRequired,
+  verifyJWTToken: PropTypes.func.isRequired,
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
+  userLogout: PropTypes.func.isRequired,
+}

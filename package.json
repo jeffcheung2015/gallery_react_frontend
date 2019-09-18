@@ -9,6 +9,9 @@
     "babel-eslint": "10.0.1",
     "bootstrap": "^3.4.1",
     "connected-react-router": "^6.5.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
     "final-form": "^4.18.2",
     "final-form-arrays": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
@@ -38,6 +41,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.3",
     "serve": "^11.1.0",
+    "sinon": "^7.4.2",
     "styled-components": "^4.3.2"
   },
   "scripts": {
@@ -50,7 +54,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "engines":{
+  "engines": {
     "node": "10.6.0",
     "npm": "6.1.0"
   },

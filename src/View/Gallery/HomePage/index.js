@@ -22,6 +22,7 @@ import { startLoading, stopLoading } from 'Reducer/UI/UIActions';
 import Loader from 'react-loaders'
 import moment from 'moment';
 import _debounce from 'lodash/debounce';
+import PropTypes from 'prop-types';
 
 const overrideStyles = theme => ({
   gridList: {
@@ -277,7 +278,7 @@ class HomePage extends React.Component{
 
           <Search
             className="Search-image"
-            input={{ icon: 'search', iconPosition: 'right' }}
+            input={{ icon: 'search' }}
             onSearchChange={_debounce(this.handleSearchChange, 500, {
               leading: true,
             })}
@@ -407,3 +408,30 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(overrideStyles)(HomePage))
+
+
+HomePage.protoTypes = {
+  classes: PropTypes.object,
+  isLoading: PropTypes.bool.isRequired,
+  userId: PropTypes.number,
+  lastRespMsg: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    created_at: PropTypes.string,
+    id:PropTypes.number,
+    image_desc:PropTypes.string,
+    image_file:PropTypes.string,
+    image_name:PropTypes.string,
+    last_edit:PropTypes.string,
+    tags:PropTypes.arrayOf(PropTypes.number),
+    user:PropTypes.number,
+  })).isRequired,
+  imgCount:PropTypes.number.isRequired,
+  numPages:PropTypes.number.isRequired,
+  currPage:PropTypes.number.isRequired,
+  tags:PropTypes.arrayOf(PropTypes.number).isRequired,
+
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
+  getImages: PropTypes.func.isRequired,
+  getTags: PropTypes.func.isRequired,
+}

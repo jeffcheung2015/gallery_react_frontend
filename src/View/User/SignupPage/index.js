@@ -23,6 +23,7 @@ import _forEach from 'lodash/forEach';
 import _isEmpty from 'lodash/isEmpty';
 import { withSnackbar } from 'notistack';
 import { startLoading, stopLoading } from "Reducer/UI/UIActions";
+import PropTypes from 'prop-types';
 
 const overrideStyles = () => ({
   signupPaper:{
@@ -248,9 +249,7 @@ class SignupPage extends React.Component{
                       size="normal"
                       data-theme="dark"
                       render="explicit"
-                      sitekey={window.origin == 'http://django-dev.ap-southeast-1.elasticbeanstalk.com' ? 
-                      "6LddeLgUAAAAAOR5taorQHIse2nUuP_nVf0D3CfE" :
-                      "6LcpqLUUAAAAAO9A0zXVAModmR0QqaUEw2NGEzsI"}
+                      sitekey={process.env.REACT_APP_GOOGLE_RECAPCHA_KEY_SITE_KEY}
                       onloadCallback={this.onLoadRecaptcha}
                       verifyCallback={this.verifyCallback}
                     />
@@ -283,3 +282,13 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(overrideStyles)(withSnackbar(SignupPage))));
+
+SignupPage.protoTypes = {
+  classes: PropTypes.object,
+  isLogin: PropTypes.bool.isRequired,
+  lastRespMsg: PropTypes.string.isRequired,
+
+  userSignup: PropTypes.func.isRequired,
+  startLoading: PropTypes.func.isRequired,
+  stopLoading: PropTypes.func.isRequired,
+}

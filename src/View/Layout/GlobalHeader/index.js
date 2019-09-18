@@ -31,7 +31,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import SideDrawer from 'View/Layout/SideDrawer';
-
+import PropTypes from 'prop-types';
 import { routeName, urlPathToTitle } from 'Utils/Config/constants';
 
 const drawerWidth = 240
@@ -59,7 +59,7 @@ const overrideStyles = (theme) => ({
     color: '#000000',
     marginRight: '20px'
   },
-  
+
   inputInput: {
     width: '100%',
     margin: '1px 1px 1px 40px',
@@ -224,3 +224,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(overrideStyles)(GlobalHeader)))
+
+GlobalHeader.protoTypes = {
+  classes: PropTypes.object,
+  isDrawerOpen: PropTypes.bool.isRequired,
+  handleDrawerAction: PropTypes.func.isRequired,
+  isLogin: PropTypes.bool.isRequired,
+  tags:PropTypes.arrayOf(PropTypes.number)
+}
