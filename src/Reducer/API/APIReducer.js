@@ -13,14 +13,10 @@ const initState = {
 export const apiReducer = (state = initState, action) => {
   switch(action.type){
       case type.API_UPLOAD_SUCCESS:
-        return _assign({}, state, {
-          lastRespMsg: action.lastRespMsg,
-
-        });
       case type.API_UPLOAD_FAIL:
+      case type.API_GET_IMAGE_FAIL:
         return _assign({}, state, {
           lastRespMsg: action.lastRespMsg,
-
         });
       case type.API_GET_IMAGE_SUCCESS:
         return _assign({}, state, {
@@ -29,10 +25,6 @@ export const apiReducer = (state = initState, action) => {
           imgCount: action.imgCount,
           numPages: action.numPages,
           currPage: action.currPage,
-        });
-      case type.API_GET_IMAGE_FAIL:
-        return _assign({}, state, {
-          lastRespMsg: action.lastRespMsg,
         });
       case type.API_GET_TAGS_SUCCESS:
         return _assign({}, state, {

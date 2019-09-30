@@ -1,0 +1,26 @@
+.Modal-updateProfile{
+  width: 40% !important;
+
+}
+.Button-updateProfile{
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+
+.form-updateUser{
+  .div-inlineGrid{
+    display: inline-grid;
+  }
+  .Button-updateProfile-submit{
+    margin: 30px 30px 0px;
+    float: right;
+  }
+  .grid{
+    >div{
+      min-width: 60%;
+      display: inline-grid;
+
+    }
+  }
+}

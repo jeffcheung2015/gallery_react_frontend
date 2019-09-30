@@ -1,0 +1,33 @@
+@import 'loaders.css/src/animations/line-scale-pulse-out-rapid.scss';
+@import '~react-calendar-heatmap/dist/styles.css';
+
+.div-profilePage-wrapper{
+  display: inline-flex;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+  margin-bottom: 60px;
+  .Loader-profile{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .div-leftCard-area{
+    padding: 20px;
+    .Label-profile{
+      margin-left: 5px !important;
+      margin-bottom: 5px;
+    }
+    .Image-profileAvatar{
+      height: 250px;
+      display: inline-flex;
+      width: 100%;
+      img{
+        margin: auto;
+        max-height: 250px;
+      }
+    }
+  }
+}

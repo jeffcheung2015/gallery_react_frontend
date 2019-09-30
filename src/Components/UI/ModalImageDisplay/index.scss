@@ -1,0 +1,25 @@
+.Modal-imageViewer{
+  width: auto !important;
+  display: inline-flex;
+  max-width: 40%;
+  .Table-imgDescContent{
+    position: relative;
+    display: grid;
+    border-radius: 5px;
+    padding: 20px;
+    position: absolute;
+    right: 100%;
+    min-width: 350px;
+    .TableCell-imgDescContent-key, .TableCell-imgDescContent-val{
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+      border-left-color: #FFFFFF !important;
+      .Label-tags{
+        margin: 5px;
+      }
+    }
+    .TableCell-imgDescContent-key{
+      display: flex;
+    }
+  }
+}

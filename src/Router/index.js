@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
+
 import { connect } from 'react-redux';
 import { verifyJWTToken, getAuthUser } from "Reducer/User/UserActions";
 import { startLoading, stopLoading } from "Reducer/UI/UIActions";
 import { bindActionCreators } from 'redux';
 
-import LoginPage from 'View/User/LoginPage';
-import SignupPage from 'View/User/SignupPage';
-import ProfilePage from 'View/User/ProfilePage';
-import UploadPage from 'View/Gallery/UploadPage';
-import HomePage from 'View/Gallery/HomePage';
+import LoginPageContainer from 'Components/User/LoginPageContainer';
+import SignupPageContainer from 'Components/User/SignupPageContainer';
+import ProfilePageContainer from 'Components/User/ProfilePageContainer';
+import UploadPageContainer from 'Components/Gallery/UploadPageContainer';
+import HomePageContainer from 'Components/Gallery/HomePageContainer';
+
+import NotFoundPage from 'Components/Layout/NotFoundPage';
 
 //list of pages component to be mounted on the routes
 import { routeName } from "Utils/Config/constants.js";
@@ -18,18 +21,20 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
         {...rest}
-        render={props =>
-          rest.isLogin ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: routeName.LOGIN,
-                state: { from: props.location }
-              }}
-            />
+        render={props => {
+          return (
+            rest.isLogin ? (
+              <Component {...props} />
+            ) : (
+              <Redirect
+                to={{
+                  pathname: routeName.LOGIN,
+                  state: { from: props.location }
+                }}
+              />
+            )
           )
-        }
+        }}
       />
   )
 }
@@ -38,17 +43,20 @@ const PublicRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
-        rest.isLogin ? (
-          <Redirect
-            to={{
-              pathname: routeName.PROFILE,
-              state: { from: props.location }
-            }}
-          />
-        ) : (
-          <Component {...props} />
+      render={props =>{
+        return (
+          rest.isLogin ? (
+            <Redirect
+              to={{
+                pathname: routeName.PROFILE,
+                state: { from: props.location }
+              }}
+            />
+          ) : (
+            <Component {...props} />
+          )
         )
+      }
       }
     />
   )
@@ -80,17 +88,17 @@ class Router extends Component {
     const {
       isLogin
     } = this.props
-
     return (
       <div>
         {(
-          <div>
-            <Route path={routeName.HOME} exact component={HomePage} />
-            <PublicRoute isLogin={isLogin} path={routeName.LOGIN} component={LoginPage} />
-            <PublicRoute isLogin={isLogin} path={routeName.SIGNUP} component={SignupPage} />
-            <PrivateRoute isLogin={isLogin} path={routeName.UPLOAD} exact component={UploadPage} />
-            <PrivateRoute isLogin={isLogin} path={routeName.PROFILE} component={ProfilePage} />
-          </div>
+          <Switch>
+            <Route path={routeName.HOME} exact component={HomePageContainer} />
+            <PublicRoute isLogin={isLogin} path={routeName.LOGIN} component={LoginPageContainer} />
+            <PublicRoute isLogin={isLogin} path={routeName.SIGNUP} component={SignupPageContainer} />
+            <PrivateRoute isLogin={isLogin} path={routeName.UPLOAD} component={UploadPageContainer} />
+            <PrivateRoute isLogin={isLogin} path={routeName.PROFILE} component={ProfilePageContainer} />
+            <Route component={NotFoundPage} />
+          </Switch>
         )}
       </div>
     )

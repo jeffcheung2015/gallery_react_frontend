@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextFieldWithMsg /> input -> correct output test Email type 1`] = `
+<Field
+  fullWidth={true}
+  name="Email"
+  render={[Function]}
+  required={true}
+  type="email"
+/>
+`;
+
+exports[`<TextFieldWithMsg /> input -> correct output test Password type 1`] = `
+<Field
+  fullWidth={true}
+  name="Password"
+  render={[Function]}
+  required={true}
+  type="password"
+/>
+`;
+
+exports[`<TextFieldWithMsg /> input -> correct output test Username type 1`] = `
+<Field
+  fullWidth={true}
+  name="Username"
+  render={[Function]}
+  required={true}
+  type="text"
+/>
+`;

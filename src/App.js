@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { loadReCaptcha } from 'react-recaptcha-google'
 // Environment Components
 import { store, history } from 'Reducer/StoreConfig';
-import Layout from 'View/Layout';
+import Layout from 'Components/Layout';
 import { SnackbarProvider } from 'notistack';
 
 class App extends React.Component {
@@ -17,18 +17,17 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <ConnectedRouter history={history}>
-            <SnackbarProvider
-              maxSnack={5}
-              dense
-              preventDuplicate
-              autoHideDuration={2000}
-              anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
+        <SnackbarProvider
+          maxSnack={5}
+          preventDuplicate
+          autoHideDuration={2000}
+          anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
+          <div className="App">
+            <ConnectedRouter history={history}>
               <Layout/>
-            </SnackbarProvider>
-          </ConnectedRouter>
-        </div>
+            </ConnectedRouter>
+          </div>
+        </SnackbarProvider>
       </Provider>
     );
   }

@@ -65,20 +65,12 @@ export const userReducer = (state = initState, action) => {
         userDtlFetched: false,
         userProfile: {}
       });
-    case type.USER_SIGNUP_SUCCESS:
-      return _assign({}, state, {
-        lastRespMsg: action.lastRespMsg,
-      });
-    case type.USER_SIGNUP_FAIL:
-      return _assign({}, state, {
-        lastRespMsg: action.lastRespMsg,
-      });
     case type.GET_USER_SUCCESS:
       return _assign({}, state, {
         lastRespMsg: action.lastRespMsg,
         userDetail: action.userDetail,
         userDtlFetched: true,
-        userProfile: action.profile
+        userProfile: action.userProfile
       });
     case type.GET_USER_FAIL:
       return _assign({}, state, {
@@ -89,21 +81,11 @@ export const userReducer = (state = initState, action) => {
         userProfile: {}
       });
     case type.UPDATE_AVATAR_SUCCESS:
-      return _assign({}, state, {
-        lastRespMsg: action.lastRespMsg,
-
-      });
     case type.UPDATE_AVATAR_FAIL:
-      return _assign({}, state, {
-        lastRespMsg: action.lastRespMsg,
-
-      });
     case type.UPDATE_USER_SUCCESS:
-      return _assign({}, state, {
-        lastRespMsg: action.lastRespMsg,
-
-      });
     case type.UPDATE_USER_FAIL:
+    case type.USER_SIGNUP_SUCCESS:
+    case type.USER_SIGNUP_FAIL:
       return _assign({}, state, {
         lastRespMsg: action.lastRespMsg,
 

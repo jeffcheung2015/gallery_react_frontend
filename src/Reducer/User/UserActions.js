@@ -49,16 +49,15 @@ export const userLogin = (username, password, recaptchaToken, callbackObj) => {
         password,
         recaptchaToken
       });
-      console.log(">>> userLogin resp:", resp)
       const { access, refresh } = resp.data;
       respData = resp.data
       respCode = resp.data.resp_code
       localStorage.setItem("access", access)
       localStorage.setItem("refresh", refresh)
-
       decoded = jwt.decode(access)
       console.log(">>> userLogin decoded:", decoded)
       isSuccessLogin = respCode === respCodes.SUCCESS_REQ
+
     }catch(error){
       console.log(">>> userLogin, error:", error)
     }
@@ -80,7 +79,6 @@ export const userLogin = (username, password, recaptchaToken, callbackObj) => {
         userProfile:{
           avatar: respData.avatar,
           lastProfileEdit: respData.last_edit,
-          noOfPosts: respData.no_of_posts,
           noOfImgs: respData.no_of_imgs
         }
       });
@@ -104,7 +102,7 @@ export const verifyJWTToken = (access, refresh) => {
         console.log(">>> verifyJWTToken accessResp:", accessResp)
         isSuccessVerify = true
       }catch(error){
-        console.error(">>> verifyJWTToken access token invalid:", error)
+        console.log(">>> verifyJWTToken access token invalid:", error)
         try{
           const refreshResp = await verifyToken(refresh);
           console.log(">>> verifyJWTToken refreshResp: ", refreshResp)
@@ -114,7 +112,7 @@ export const verifyJWTToken = (access, refresh) => {
           localStorage.setItem("access", newAccess)
           isSuccessVerify = true
         }catch(error){
-          console.error(">>> verifyJWTToken refresh token invalid:", error)
+          console.error(">>>verifyJWTToken refresh token invalid:", error)
         }
       }
     }
@@ -165,7 +163,7 @@ export const getAuthUser = (access) => {
           createdAt: respData.date_joined,
           lastLoginAt: respData.last_login,
         },
-        profile: {
+        userProfile: {
           avatar: respData.avatar,
           lastProfileEdit: respData.last_edit,
           noOfImgs: respData.no_of_imgs,
@@ -243,14 +241,11 @@ export const updateUser = (formData, access, callbackObj) =>{
 }
 
 export const userLogout = () => {
-
   return async (dispatch) => {
     const resp = await logout();
-
     localStorage.clear()
-
     dispatch({
-      lastRespMsg: resp.data.resp_code,
+      lastRespMsg: '00000',
       type: type.USER_LOGOUT,
     });
   }

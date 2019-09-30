@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalImageDisplay /> input -> correct output test 1`] = `
+<Modal
+  centered={true}
+  className="Modal-imageViewer"
+  closeOnDimmerClick={true}
+  closeOnDocumentClick={false}
+  dimmer={true}
+  eventPool="Modal"
+  onClose={[MockFunction]}
+  open={false}
+>
+  <Table
+    as="table"
+    basic="very"
+    celled={true}
+    className="Table-imgDescContent"
+    collapsing={true}
+  >
+    <TableBody
+      as="tbody"
+    >
+      <TableRow
+        as="tr"
+        cellAs="td"
+      >
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-key"
+        >
+          <Icon
+            as="i"
+            name="list"
+          />
+          Name:
+        </TableCell>
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-val"
+        >
+          zebra
+        </TableCell>
+      </TableRow>
+      <TableRow
+        as="tr"
+        cellAs="td"
+      >
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-key"
+        >
+          <Icon
+            as="i"
+            name="newspaper outline"
+          />
+          Description:
+        </TableCell>
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-val"
+        >
+          dummy desc
+        </TableCell>
+      </TableRow>
+      <TableRow
+        as="tr"
+        cellAs="td"
+      >
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-key"
+        >
+          <Icon
+            as="i"
+            name="calendar alternate outline"
+          />
+          Uploaded Date:
+        </TableCell>
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-val"
+        >
+          2018-06-12 09:55:22
+        </TableCell>
+      </TableRow>
+      <TableRow
+        as="tr"
+        cellAs="td"
+      >
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-key"
+        >
+          <Icon
+            as="i"
+            name="tags"
+          />
+          Tags:
+        </TableCell>
+        <TableCell
+          as="td"
+          className="TableCell-imgDescContent-val"
+        >
+          <Label
+            className="Label-tags"
+            key="currLabel-0"
+          >
+            Dog
+          </Label>
+          <Label
+            className="Label-tags"
+            key="currLabel-1"
+          >
+            Animals
+          </Label>
+          <Label
+            className="Label-tags"
+            key="currLabel-2"
+          >
+            Flowers
+          </Label>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+  <Image
+    alt="imageViewer-img"
+    as="img"
+    src="undefined/api/zebra.jpg"
+    ui={true}
+    wrapped={true}
+  />
+</Modal>
+`;

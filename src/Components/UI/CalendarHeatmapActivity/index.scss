@@ -1,0 +1,35 @@
+.div-calendarHeatmapActivity-wrapper{
+  width: 100%;
+  position: relative;
+  left: 50%;
+  top: 0%;
+  transform: translateX(-50%);
+  .react-calendar-heatmap-weekday-label, .react-calendar-heatmap-month-label{
+    font-size: 6px !important;
+  }
+  svg{
+    width: 75%;
+    margin: auto;
+    display: block;
+  }
+  .color-heatmap{
+    &-0{
+      fill: #ecf1f1
+    }
+    &-1{
+      fill: #c0e9e6
+    }
+    &-2{
+      fill: #85e6df
+    }
+    &-3{
+      fill: #5cefe4
+    }
+    &-4{
+      fill: #00b4ef
+    }
+    &-5{
+      fill: #0067ef
+    }
+  }
+}
