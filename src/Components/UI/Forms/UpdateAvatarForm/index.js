@@ -77,7 +77,7 @@ class UpdateAvatarForm extends React.Component{
       <div className="div-updateAvatar-wrapper">
         <Image
           onClick={() => this.handleModalOpen()}
-          src={(process.env.REACT_APP_SERVER_HOST_URL + userProfile.avatar) || ""} wrapped
+          src={((process.env.NODE_ENV == 'development' ? process.env.REACT_APP_SERVER_HOST_URL : "") + userProfile.avatar) || ""} wrapped
           className="Image-profileAvatar"/>
         <Modal
           className="Modal-updateAvatar"
@@ -86,7 +86,7 @@ class UpdateAvatarForm extends React.Component{
           >
           <Modal.Header>Profile Picture</Modal.Header>
           <Modal.Content image>
-            <Image size='medium' src={updatedAvatar || (process.env.REACT_APP_SERVER_HOST_URL + userProfile.avatar) || ""} wrapped />
+            <Image size='medium' src={updatedAvatar || ((process.env.NODE_ENV == 'development' ? process.env.REACT_APP_SERVER_HOST_URL : "") + userProfile.avatar) || ""} wrapped />
             <Modal.Description>
               <Card className="Card-updateAvatar">
                 <RippleDropzoneArea

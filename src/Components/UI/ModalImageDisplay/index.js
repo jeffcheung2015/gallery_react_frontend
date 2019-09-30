@@ -11,6 +11,7 @@ const ModalImageDisplay = (props) => {
     handleModalClose,
     imgPreviewOpen, currImgName, currImgDesc, currImgCreatedAt, currTags, tags, currImgSrc
   } = props
+
   return (
     <Modal
       className="Modal-imageViewer"
@@ -47,7 +48,7 @@ const ModalImageDisplay = (props) => {
           </Table.Row>
         </Table.Body>
       </Table>
-      <Image alt='imageViewer-img' src={process.env.REACT_APP_SERVER_HOST_URL + currImgSrc} wrapped />
+      <Image alt='imageViewer-img' src={(process.env.NODE_ENV == 'development' ? process.env.REACT_APP_SERVER_HOST_URL : "") + currImgSrc} wrapped />
     </Modal>
   );
 }

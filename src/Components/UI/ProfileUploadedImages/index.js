@@ -177,7 +177,7 @@ class ProfileUploadedImages extends React.Component{
                             return (
                               <Grid.Column className="GridCol-img" key={"GridCol-" + idx} onClick={() => this.handleModalOpen(imgSrc, elem)}>
                                 <Card className="Card-img">
-                                  <Image className="Image-uploadedImgs" src={process.env.REACT_APP_SERVER_HOST_URL + imgSrc}/>
+                                  <Image className="Image-uploadedImgs" src={(process.env.NODE_ENV == 'development' ? process.env.REACT_APP_SERVER_HOST_URL : "") + imgSrc}/>
                                 </Card>
                               </Grid.Column>
                               )
@@ -197,7 +197,7 @@ class ProfileUploadedImages extends React.Component{
           onClose={this.handleModalClose}>
           <Modal.Header>Update Image</Modal.Header>
           <Modal.Content image>
-            <Image wrapped size='medium' src={(process.env.REACT_APP_SERVER_HOST_URL + currImgSrc) || ""} />
+            <Image wrapped size='medium' src={((process.env.NODE_ENV == 'development' ? process.env.REACT_APP_SERVER_HOST_URL : "") + currImgSrc) || ""} />
             <div className="div-updateImage-wrapper">
               <Input icon="list" iconPosition="left"
                 placeholder="Image name"

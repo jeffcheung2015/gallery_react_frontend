@@ -1,4 +1,3 @@
-export const BASE_URL = process.env.REACT_APP_SERVER_HOST_URL
 export const routeName = {
   HOME : "/",
   LOGIN : "/login",

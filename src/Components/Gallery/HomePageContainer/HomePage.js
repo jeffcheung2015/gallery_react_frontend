@@ -279,7 +279,7 @@ class HomePage extends React.Component{
                       return (
                         <Grid.Column key={"GridCol-" + idx}>
                           <Card onClick={() => this.onImageClick(currImgName, currImgDesc, currImgSrc, currTags, currImgCreatedAt)} className="Card-img" color={cardIdxToColor[idx%12]}>
-                            <Image src={process.env.REACT_APP_SERVER_HOST_URL + currImgSrc}/>
+                            <Image src={(process.env.NODE_ENV == 'development' ? process.env.REACT_APP_SERVER_HOST_URL : "") + currImgSrc}/>
                           </Card>
                         </Grid.Column>
                       )
