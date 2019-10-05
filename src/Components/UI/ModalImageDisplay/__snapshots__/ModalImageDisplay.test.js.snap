@@ -127,7 +127,7 @@ exports[`<ModalImageDisplay /> input -> correct output test 1`] = `
   <Image
     alt="imageViewer-img"
     as="img"
-    src="undefined/api/zebra.jpg"
+    src="/api/zebra.jpg"
     ui={true}
     wrapped={true}
   />

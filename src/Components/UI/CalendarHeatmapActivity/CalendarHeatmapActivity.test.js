@@ -24,8 +24,11 @@ describe("<CalendarHeatmapActivity />", () => {
     expect(heatmapDayNodes.length).toBe(120)
   })
 
-  it("Activities props are correctly shown on the heatmap", () => {
-    expect(calendarHeatmapNode.find(".color-heatmap-2").length).toBe(1)
-    expect(calendarHeatmapNode.find(".color-heatmap-4").length).toBe(1)
+  it("Activities props are correctly shown on the heatmap", (done) => {
+    setTimeout(() => {
+      expect(calendarHeatmapNode.find(".color-heatmap-2").length).toBe(1)
+      expect(calendarHeatmapNode.find(".color-heatmap-4").length).toBe(1)
+      done()
+    })
   })
 })
