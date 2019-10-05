@@ -79,7 +79,6 @@ class LoginForm extends React.Component{
   }
 
   render(){
-    console.log("@@@@", process.env)
     const {
       classes, startLoading, stopLoading, userLogin,
     } = this.props

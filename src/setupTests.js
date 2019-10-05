@@ -16,17 +16,17 @@ enzyme.configure({
 
 let log, error, warn
 beforeAll(() => {
-  // log = console.log
+  log = console.log
   warn = console.warn
-  // error = console.error
-  // global.console.log = () => {}
+  error = console.error
+  global.console.log = () => {}
   global.console.warn = () => {}
-  // global.console.error = () => {}
+  global.console.error = () => {}
 
 })
 
 afterAll(() => {
-  // global.console.log = log
+  global.console.log = log
   global.console.warn = warn
-  // global.console.error = error
+  global.console.error = error
 })
